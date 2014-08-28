@@ -1,1 +1,1 @@
-web: gunicorn -b 0.0.0.0:$PORT -w 9 -k gevent --max-requests 250 nycbbl.wsgi:application
+web: gunicorn -b 0.0.0.0:$PORT -w 9 -k gevent --max-requests 250 reelreview.wsgi:application
