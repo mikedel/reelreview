@@ -1,4 +1,5 @@
 import os
+import dj_database_url
 # Django settings for reelreview project.
 
 DEBUG = True if os.environ.get('REEL_DEBUG',None) == 'true' else False
@@ -10,16 +11,24 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASES = {
-    'default': {
-        'ENGINE': os.environ.get('REEL_DB_ENGINE','django.db.backends.postgresql_psycopg2'),
-        'NAME': os.environ.get('REEL_DB_NAME','reelreview'),
-        'USER': os.environ.get('REEL_DB_USER',''),
-        'PASSWORD': os.environ.get('REEL_DB_PASSWORD',''),
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
+DATABASES = {}
+if os.environ.get('REEL_RUNLOCAL',None):
+    db_engine = os.environ.get('REEL_DB_ENGINE','django.db.backends.postgresql_psycopg2')
+    db_name = os.environ.get('REEL_DB_NAME','reelreview')
+    db_user = os.environ.get('REEL_DB_USER','')
+    db_password = os.environ.get('REEL_DB_PASSWORD','')
+    DATABASES = {
+        'default': {
+            'ENGINE':db_engine,
+            'NAME':db_name,
+            'USER':db_user,
+            'PASSWORD':db_password,
+            'HOST':'',
+            'PORT':'',
+        }
     }
-}
+else:
+    DATABASES['default'] = dj_database_url.config()
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
