@@ -12,7 +12,7 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': os.environ.get('REEL_DB_ENGINE','django.db.backends.mysql'),
+        'ENGINE': os.environ.get('REEL_DB_ENGINE','django.db.backends.postgresql_psycopg2'),
         'NAME': os.environ.get('REEL_DB_NAME','reelreview'),
         'USER': os.environ.get('REEL_DB_USER',''),
         'PASSWORD': os.environ.get('REEL_DB_PASSWORD',''),
