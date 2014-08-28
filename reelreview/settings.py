@@ -5,7 +5,7 @@ DEBUG = True if os.environ.get('REEL_DEBUG',None) == 'true' else False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('mike', 'mcdelsi@gmail.com'),
 )
 
 MANAGERS = ADMINS
