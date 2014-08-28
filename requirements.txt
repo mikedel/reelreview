@@ -1,5 +1,4 @@
 Django==1.5
-MySQL-python==1.2.5
 argparse==1.2.1
 gevent==1.0.1
 greenlet==0.4.3
