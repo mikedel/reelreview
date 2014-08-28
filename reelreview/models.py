@@ -9,7 +9,7 @@ class Movie(models.Model):
     title = models.CharField(max_length=255)
     year = models.IntegerField()
     #image = models.ImageField()
-    #TODO: add image field (involdes MEDIA_ROOT and MEDIA_URL)
+    #TODO: add image field (involdes MEDIA_ROOT and MEDIA_URL for both local and remote)
 
     class Meta:
         unique_together = ('title', 'year',)
