@@ -1,25 +1,35 @@
 import os
+import dj_database_url
 # Django settings for reelreview project.
+
+PROJECT_SETTING_PATH = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT_PATH = os.path.abspath(os.path.join(PROJECT_SETTING_PATH, '..'))
 
 DEBUG = True if os.environ.get('REEL_DEBUG',None) == 'true' else False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('mike', 'mcdelsi@gmail.com'),
 )
 
 MANAGERS = ADMINS
 
+db_engine = os.environ.get('REEL_DB_ENGINE','django.db.backends.postgresql_psycopg2')
+db_name = os.environ.get('REEL_DB_NAME','reelreview')
+db_user = os.environ.get('REEL_DB_USER','')
+db_password = os.environ.get('REEL_DB_PASSWORD','')
 DATABASES = {
     'default': {
-        'ENGINE': os.environ.get('REEL_DB_ENGINE','django.db.backends.mysql'),
-        'NAME': os.environ.get('REEL_DB_NAME','reelreview'),
-        'USER': os.environ.get('REEL_DB_USER',''),
-        'PASSWORD': os.environ.get('REEL_DB_PASSWORD',''),
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
+        'ENGINE':db_engine,
+        'NAME':db_name,
+        'USER':db_user,
+        'PASSWORD':db_password,
+        'HOST':'',
+        'PORT':'',
     }
 }
+if not os.environ.get('REEL_RUNLOCAL', None):
+    DATABASES['default'] = dj_database_url.config()
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
@@ -69,6 +79,7 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
+    #os.path.join(PROJECT_SETTING_PATH, 'static'),
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
