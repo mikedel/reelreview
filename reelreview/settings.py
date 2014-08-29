@@ -11,23 +11,21 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASES = {}
-if os.environ.get('REEL_RUNLOCAL',None):
-    db_engine = os.environ.get('REEL_DB_ENGINE','django.db.backends.postgresql_psycopg2')
-    db_name = os.environ.get('REEL_DB_NAME','reelreview')
-    db_user = os.environ.get('REEL_DB_USER','')
-    db_password = os.environ.get('REEL_DB_PASSWORD','')
-    DATABASES = {
-        'default': {
-            'ENGINE':db_engine,
-            'NAME':db_name,
-            'USER':db_user,
-            'PASSWORD':db_password,
-            'HOST':'',
-            'PORT':'',
-        }
+db_engine = os.environ.get('REEL_DB_ENGINE','django.db.backends.postgresql_psycopg2')
+db_name = os.environ.get('REEL_DB_NAME','reelreview')
+db_user = os.environ.get('REEL_DB_USER','')
+db_password = os.environ.get('REEL_DB_PASSWORD','')
+DATABASES = {
+    'default': {
+        'ENGINE':db_engine,
+        'NAME':db_name,
+        'USER':db_user,
+        'PASSWORD':db_password,
+        'HOST':'',
+        'PORT':'',
     }
-else:
+}
+if not os.environ.get('REEL_RUNLOCAL', None):
     DATABASES['default'] = dj_database_url.config()
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
