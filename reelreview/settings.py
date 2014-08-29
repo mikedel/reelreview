@@ -2,6 +2,9 @@ import os
 import dj_database_url
 # Django settings for reelreview project.
 
+PROJECT_SETTING_PATH = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT_PATH = os.path.abspath(os.path.join(PROJECT_SETTING_PATH, '..'))
+
 DEBUG = True if os.environ.get('REEL_DEBUG',None) == 'true' else False
 TEMPLATE_DEBUG = DEBUG
 
